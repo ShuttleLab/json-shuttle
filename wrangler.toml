@@ -1,0 +1,8 @@
+# Cloudflare Pages 配置（next-on-pages 构建输出）
+name = "vibe-kanban-pages"
+compatibility_date = "2024-09-23"
+# SSR/Edge 必须开启，否则运行时会报 no-nodejs_compat
+compatibility_flags = ["nodejs_compat"]
+
+# 构建输出目录，与 package.json 中 pages:build 产出一致
+pages_build_output_dir = ".vercel/output/static"

@@ -113,7 +113,7 @@ export const messages = {
       contact: {
         title: "联系方式",
         email: "邮箱：",
-        emailValue: "a.tiling120@slmail.me",
+        emailValue: "shuttlelab.org@gmail.com",
       },
     },
     footer: {
@@ -239,7 +239,7 @@ export const messages = {
       contact: {
         title: "Contact",
         email: "Email: ",
-        emailValue: "a.tiling120@slmail.me",
+        emailValue: "shuttlelab.org@gmail.com",
       },
     },
     footer: {

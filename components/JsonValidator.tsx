@@ -9,6 +9,8 @@ import {
   type JsonValidateResult,
 } from "@/lib/json-validator";
 import { InputWithLineNumbers, OutputWithLineNumbers } from "./CodeWithLineNumbers";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default function JsonValidator() {
   const { t } = useI18n();
@@ -63,18 +65,19 @@ export default function JsonValidator() {
   }, []);
 
   return (
-    <section
-      className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-6 dark:border-zinc-800 dark:bg-zinc-900/30 sm:p-8"
+    <Card
+      className="border-chart-1/40 bg-chart-1/5"
       aria-labelledby="json-validator-title"
     >
-      <h2
-        id="json-validator-title"
-        className="mb-4 text-lg font-medium text-foreground sm:text-xl"
-      >
-        {t("jsonValidator.title")}
-      </h2>
-
-      <div className="space-y-4">
+      <CardHeader>
+        <h2
+          id="json-validator-title"
+          className="text-xl font-bold text-foreground sm:text-2xl"
+        >
+          {t("jsonValidator.title")}
+        </h2>
+      </CardHeader>
+      <CardContent className="space-y-4">
         <InputWithLineNumbers
           aria-label={t("jsonValidator.ariaLabelInput")}
           placeholder={t("jsonValidator.placeholder")}
@@ -87,56 +90,60 @@ export default function JsonValidator() {
         />
 
         <div className="flex flex-wrap gap-2">
-          <button
+          <Button
             type="button"
+            size="lg"
             aria-label={t("jsonValidator.ariaLabelValidate")}
             onClick={handleValidate}
-            className="rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 dark:focus:ring-zinc-400 dark:focus:ring-offset-zinc-900"
           >
             {t("jsonValidator.validate")}
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="success"
+            size="lg"
             aria-label={t("jsonValidator.ariaLabelBeautify")}
             onClick={handleBeautify}
-            className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:bg-emerald-500 dark:hover:bg-emerald-400 dark:focus:ring-emerald-400 dark:focus:ring-offset-zinc-900"
           >
             {t("jsonValidator.beautify")}
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            className="bg-chart-4 text-white hover:bg-chart-4/90"
+            size="lg"
             aria-label={t("jsonValidator.ariaLabelMinify")}
             onClick={handleMinify}
-            className="rounded-lg bg-amber-600 px-4 py-2 text-sm font-medium text-white hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 dark:bg-amber-500 dark:hover:bg-amber-400 dark:focus:ring-amber-400 dark:focus:ring-offset-zinc-900"
           >
             {t("jsonValidator.minify")}
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="outline"
+            size="lg"
             onClick={handleClear}
-            className="rounded-lg border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-foreground hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 dark:border-zinc-600 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:focus:ring-zinc-400 dark:focus:ring-offset-zinc-900"
           >
             {t("jsonValidator.clear")}
-          </button>
+          </Button>
         </div>
 
         {formattedResult !== null && (
           <div
-            className="rounded-lg border border-zinc-200 bg-white dark:border-zinc-700 dark:bg-zinc-900/50"
+            className="rounded-lg border-2 border-border bg-card"
             role="region"
             aria-label={t("jsonValidator.formatResult")}
           >
-            <div className="flex items-center justify-between gap-2 border-b border-zinc-200 px-3 py-2 dark:border-zinc-700">
-              <span className="text-sm font-medium text-foreground">
+            <div className="flex items-center justify-between gap-2 border-b border-border px-3 py-2">
+              <span className="text-base font-semibold text-foreground">
                 {t("jsonValidator.formatResult")}
               </span>
-              <button
+              <Button
                 type="button"
+                variant="outline"
+                size="sm"
                 onClick={handleCopyResult}
-                className="rounded-md border border-zinc-300 bg-white px-3 py-1.5 text-sm font-medium text-foreground hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 dark:border-zinc-600 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:focus:ring-zinc-400 dark:focus:ring-offset-zinc-900"
               >
                 {copyLabel ?? t("jsonValidator.copyResult")}
-              </button>
+              </Button>
             </div>
             <OutputWithLineNumbers
               aria-label={t("jsonValidator.formatResult")}
@@ -148,53 +155,57 @@ export default function JsonValidator() {
 
         {result !== null && (
           <div
-            className={`rounded-lg border p-4 ${
+            className={`rounded-lg border-2 p-4 ${
               result.ok
-                ? "border-green-500/50 bg-green-500/10 dark:border-green-400/40 dark:bg-green-500/10"
-                : "border-red-500/50 bg-red-500/10 dark:border-red-400/40 dark:bg-red-500/10"
+                ? "border-success/50 bg-success/10"
+                : "border-destructive/50 bg-destructive/10"
             }`}
             role="status"
             aria-live="polite"
             data-valid={result.ok}
           >
             {result.ok ? (
-              <p className="text-sm font-medium text-green-700 dark:text-green-400">
+              <p className="text-base font-semibold text-success">
                 {t("jsonValidator.valid")}
               </p>
             ) : (
-              <div className="space-y-3 text-sm">
-                <p className="font-medium text-red-700 dark:text-red-400">
+              <div className="space-y-3 text-base">
+                <p className="font-semibold text-destructive">
                   {t("jsonValidator.invalid")}
                 </p>
-                <p className="text-zinc-600 dark:text-zinc-400">
+                <p className="text-muted-foreground">
                   {t("jsonValidator.errorLineHint")}
                 </p>
                 <dl className="grid gap-1.5 sm:grid-cols-[auto_1fr]">
-                  <dt className="text-zinc-500 dark:text-zinc-400">
+                  <dt className="text-muted-foreground">
                     {t("jsonValidator.line")}:
                   </dt>
                   <dd className="font-mono">{result.line}</dd>
-                  <dt className="text-zinc-500 dark:text-zinc-400">
+                  <dt className="text-muted-foreground">
                     {t("jsonValidator.column")}:
                   </dt>
                   <dd className="font-mono">{result.column}</dd>
-                  <dt className="text-zinc-500 dark:text-zinc-400">
+                  <dt className="text-muted-foreground">
                     {t("jsonValidator.errorMessage")}:
                   </dt>
-                  <dd className="break-all font-mono text-red-700 dark:text-red-400">
+                  <dd className="break-all font-mono text-destructive">
                     {result.message}
                   </dd>
                 </dl>
-                {(result.snippet !== undefined || result.pointer !== undefined) && (
-                  <div className="mt-2 overflow-x-auto rounded border border-zinc-200 bg-zinc-100/80 p-3 font-mono dark:border-zinc-700 dark:bg-zinc-800/80">
-                    <p className="text-zinc-500 dark:text-zinc-400">
+                {(result.snippet !== undefined ||
+                  result.pointer !== undefined) && (
+                  <div className="mt-2 overflow-x-auto rounded border border-border bg-muted/80 p-3 font-mono">
+                    <p className="text-muted-foreground">
                       {t("jsonValidator.errorSnippet")}
                     </p>
                     <pre className="mt-1 whitespace-pre text-foreground">
                       {result.snippet || " "}
                     </pre>
                     {result.pointer !== undefined && (
-                      <pre className="text-red-600 dark:text-red-400" aria-hidden>
+                      <pre
+                        className="text-destructive"
+                        aria-hidden
+                      >
                         {result.pointer}
                       </pre>
                     )}
@@ -204,7 +215,7 @@ export default function JsonValidator() {
             )}
           </div>
         )}
-      </div>
-    </section>
+      </CardContent>
+    </Card>
   );
 }

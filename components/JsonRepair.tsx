@@ -4,6 +4,8 @@ import { useCallback, useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import { repairJson, getRepairedChangedLines } from "@/lib/json-repair";
 import { InputWithLineNumbers, OutputWithLineNumbers } from "./CodeWithLineNumbers";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default function JsonRepair() {
   const { t } = useI18n();
@@ -56,18 +58,19 @@ export default function JsonRepair() {
   }, []);
 
   return (
-    <section
-      className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-6 dark:border-zinc-800 dark:bg-zinc-900/30 sm:p-8"
+    <Card
+      className="border-chart-2/40 bg-chart-2/5"
       aria-labelledby="json-repair-title"
     >
-      <h2
-        id="json-repair-title"
-        className="mb-4 text-lg font-medium text-foreground sm:text-xl"
-      >
-        {t("jsonRepair.title")}
-      </h2>
-
-      <div className="space-y-4">
+      <CardHeader>
+        <h2
+          id="json-repair-title"
+          className="text-xl font-bold text-foreground sm:text-2xl"
+        >
+          {t("jsonRepair.title")}
+        </h2>
+      </CardHeader>
+      <CardContent className="space-y-4">
         <InputWithLineNumbers
           aria-label={t("jsonRepair.ariaLabelInput")}
           placeholder={t("jsonRepair.placeholder")}
@@ -82,55 +85,59 @@ export default function JsonRepair() {
         />
 
         <div className="flex flex-wrap gap-2">
-          <button
+          <Button
             type="button"
+            size="lg"
+            className="bg-chart-2 text-white hover:bg-chart-2/90"
             aria-label={t("jsonRepair.ariaLabelRepair")}
             onClick={handleRepair}
-            className="rounded-lg bg-violet-600 px-4 py-2 text-sm font-medium text-white hover:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 dark:bg-violet-500 dark:hover:bg-violet-400 dark:focus:ring-violet-400 dark:focus:ring-offset-zinc-900"
           >
             {t("jsonRepair.repair")}
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="outline"
+            size="lg"
             onClick={handleClear}
-            className="rounded-lg border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-foreground hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 dark:border-zinc-600 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:focus:ring-zinc-400 dark:focus:ring-offset-zinc-900"
           >
             {t("jsonRepair.clear")}
-          </button>
+          </Button>
         </div>
 
         {repairedText !== null && (
           <div
-            className="rounded-lg border border-zinc-200 bg-white dark:border-zinc-700 dark:bg-zinc-900/50"
+            className="rounded-lg border-2 border-border bg-card"
             role="region"
             aria-label={t("jsonRepair.repairResult")}
           >
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-200 px-3 py-2 dark:border-zinc-700">
-              <span className="text-sm font-medium text-foreground">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border px-3 py-2">
+              <span className="text-base font-semibold text-foreground">
                 {t("jsonRepair.repairResult")}
               </span>
               <div className="flex flex-wrap items-center gap-2">
                 {repairedChangedLines.length > 0 && (
-                  <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                  <span className="text-sm text-muted-foreground">
                     {t("jsonRepair.repairedLinesHint")}
                   </span>
                 )}
                 <div className="flex gap-2">
-                  <button
+                  <Button
                     type="button"
+                    size="sm"
+                    className="bg-chart-2 text-white hover:bg-chart-2/90"
                     aria-label={t("jsonRepair.ariaLabelApply")}
                     onClick={handleApply}
-                    className="rounded-lg bg-violet-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 dark:bg-violet-500 dark:hover:bg-violet-400 dark:focus:ring-violet-400 dark:focus:ring-offset-zinc-900"
                   >
                     {t("jsonRepair.apply")}
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     type="button"
+                    variant="outline"
+                    size="sm"
                     onClick={handleCopyResult}
-                    className="rounded-md border border-zinc-300 bg-white px-3 py-1.5 text-sm font-medium text-foreground hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 dark:border-zinc-600 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:focus:ring-zinc-400 dark:focus:ring-offset-zinc-900"
                   >
                     {copyLabel ?? t("jsonRepair.copyResult")}
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -145,18 +152,18 @@ export default function JsonRepair() {
 
         {error !== null && (
           <div
-            className="rounded-lg border border-red-500/50 bg-red-500/10 p-4 dark:border-red-400/40 dark:bg-red-500/10"
+            className="rounded-lg border-2 border-destructive/50 bg-destructive/10 p-4"
             role="alert"
           >
-            <p className="text-sm font-medium text-red-700 dark:text-red-400">
+            <p className="text-base font-semibold text-destructive">
               {t("jsonRepair.repairFailed")}
             </p>
-            <p className="mt-1 font-mono text-sm text-red-600 dark:text-red-400">
+            <p className="mt-1 font-mono text-sm text-destructive">
               {error}
             </p>
           </div>
         )}
-      </div>
-    </section>
+      </CardContent>
+    </Card>
   );
 }

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import VibeKanbanWrapper from "./VibeKanbanWrapper";
 import { I18nProvider } from "@/lib/i18n";
+import { ThemeSync } from "@/components/theme-sync";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -27,10 +28,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN">
+    <html lang="zh-CN" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col bg-background font-sans text-foreground antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col font-sans antialiased`}
       >
+        <ThemeSync />
         <VibeKanbanWrapper />
         <I18nProvider>
           <Header />

@@ -9,10 +9,10 @@ export default function Home() {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
       <section className="mb-12 text-center sm:mb-16">
-        <h1 className="mb-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+        <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
           {t("home.title")}
         </h1>
-        <p className="mx-auto max-w-2xl text-base text-zinc-600 dark:text-zinc-400 sm:text-lg">
+        <p className="mx-auto max-w-2xl text-lg text-muted-foreground font-medium sm:text-xl">
           {t("home.subtitle")}
         </p>
       </section>

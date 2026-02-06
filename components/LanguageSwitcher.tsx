@@ -2,13 +2,15 @@
 
 import { useI18n } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export default function LanguageSwitcher() {
   const { locale, setLocale, t } = useI18n();
 
   return (
     <div
-      className="flex items-center gap-0.5 rounded-lg border border-zinc-200 bg-zinc-50/80 p-0.5 dark:border-zinc-700 dark:bg-zinc-800/80"
+      className="flex items-center gap-0.5 rounded-lg border-2 border-border bg-muted/50 p-0.5"
       role="group"
       aria-label={t("lang.switcherAria")}
     >
@@ -17,11 +19,12 @@ export default function LanguageSwitcher() {
           key={lang}
           type="button"
           onClick={() => setLocale(lang as Locale)}
-          className={`rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors ${
+          className={cn(
+            "rounded-md px-3 py-2 text-sm font-semibold transition-colors",
             locale === lang
-              ? "bg-background text-foreground shadow-sm dark:bg-zinc-700 dark:text-foreground"
-              : "text-zinc-500 hover:text-foreground dark:text-zinc-400 dark:hover:text-foreground"
-          }`}
+              ? "bg-background text-foreground shadow-sm"
+              : "text-muted-foreground hover:text-foreground"
+          )}
           aria-pressed={locale === lang}
           aria-label={t(`lang.${lang}`)}
         >

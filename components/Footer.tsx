@@ -13,10 +13,10 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-zinc-200 bg-background dark:border-zinc-800">
+    <footer className="border-t border-border bg-card">
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="text-base font-medium text-muted-foreground">
             © {currentYear} {t("common.appName")}. {t("footer.rights")}
           </p>
           <nav
@@ -27,7 +27,7 @@ export default function Footer() {
               <Link
                 key={href}
                 href={href}
-                className="text-sm text-zinc-500 transition-colors hover:text-foreground dark:text-zinc-400 dark:hover:text-foreground"
+                className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
                 {t(key)}
               </Link>

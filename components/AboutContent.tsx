@@ -2,6 +2,15 @@
 
 import { useState, useRef, useCallback } from "react";
 import { useI18n } from "@/lib/i18n";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
 
 const SECURITY_KEYS = [
   "local",
@@ -17,6 +26,13 @@ const PAYMENT_QR = [
   { key: "paypal", src: "/paypal-qr.png" },
   { key: "wechat", src: "/wechat-qr.png" },
 ] as const;
+
+const CHART_CLASSES = [
+  "border-chart-1/40 bg-chart-1/10",
+  "border-chart-2/40 bg-chart-2/10",
+  "border-chart-3/40 bg-chart-3/10",
+  "border-chart-4/40 bg-chart-4/10",
+];
 
 export function AboutContent() {
   const { t } = useI18n();
@@ -60,87 +76,99 @@ export function AboutContent() {
     <>
       <div className="mx-auto w-full max-w-6xl space-y-12 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         {/* 服务介绍 */}
-      <section className="space-y-3">
-        <h2 className="text-lg font-medium text-foreground">
-          {t("about.intro.title")}
-        </h2>
-        <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-          {t("about.intro.body")}
-        </p>
-      </section>
+        <Card className="border-2 border-border shadow-md">
+          <CardHeader>
+            <h2 className="text-xl font-bold text-foreground sm:text-2xl">
+              {t("about.intro.title")}
+            </h2>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground text-lg leading-relaxed">
+              {t("about.intro.body")}
+            </p>
+          </CardContent>
+        </Card>
 
-      {/* 安全特性 - 4 块卡片 */}
-      <section className="space-y-4">
-        <h2 className="text-lg font-medium text-foreground">
-          {t("about.security.title")}
-        </h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {SECURITY_KEYS.map((key) => (
-            <div
-              key={key}
-              className="rounded-xl border border-zinc-200 bg-zinc-50/80 p-4 dark:border-zinc-700 dark:bg-zinc-800/80"
-            >
-              <h3 className="mb-2 font-medium text-foreground">
-                {t(`about.security.${key}.title`)}
-              </h3>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                {t(`about.security.${key}.desc`)}
-              </p>
+        {/* 安全特性 */}
+        <section className="space-y-4">
+          <h2 className="text-xl font-bold text-foreground sm:text-2xl">
+            {t("about.security.title")}
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {SECURITY_KEYS.map((key, i) => (
+              <Card
+                key={key}
+                className={`border-2 shadow-md ${CHART_CLASSES[i] ?? "border-border bg-card"}`}
+              >
+                <CardHeader className="pb-2">
+                  <h3 className="font-bold text-foreground">
+                    {t(`about.security.${key}.title`)}
+                  </h3>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-muted-foreground text-base leading-relaxed">
+                    {t(`about.security.${key}.desc`)}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* 使用场景 */}
+        <Card className="border-2 border-border shadow-md">
+          <CardHeader>
+            <h2 className="text-xl font-bold text-foreground sm:text-2xl">
+              {t("about.useCases.title")}
+            </h2>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground text-lg leading-relaxed">
+              {t("about.useCases.items")}
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* 支持我们 */}
+        <Card className="border-2 border-primary/30 bg-primary/10 shadow-md">
+          <CardHeader>
+            <h2 className="text-xl font-bold text-foreground sm:text-2xl">
+              {t("about.support.title")}
+            </h2>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-wrap gap-3">
+              <Button size="lg" onClick={handleSupport}>
+                {t("about.support.supportBtn")}
+              </Button>
+              <Button variant="outline" size="lg" onClick={handleShare}>
+                {t("about.support.shareBtn")}
+              </Button>
             </div>
-          ))}
-        </div>
-      </section>
+          </CardContent>
+        </Card>
 
-      {/* 使用场景 */}
-      <section className="space-y-3">
-        <h2 className="text-lg font-medium text-foreground">
-          {t("about.useCases.title")}
-        </h2>
-        <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-          {t("about.useCases.items")}
-        </p>
-      </section>
-
-      {/* 支持我们 - 支持/分享按钮 */}
-      <section className="space-y-4">
-        <h2 className="text-lg font-medium text-foreground">
-          {t("about.support.title")}
-        </h2>
-        <div className="flex flex-wrap gap-3">
-          <button
-            type="button"
-            onClick={handleSupport}
-            className="rounded-lg bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 dark:bg-foreground dark:text-background"
-          >
-            {t("about.support.supportBtn")}
-          </button>
-          <button
-            type="button"
-            onClick={handleShare}
-            className="rounded-lg border border-zinc-300 bg-transparent px-4 py-2 text-sm font-medium text-foreground hover:bg-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-offset-2 dark:border-zinc-600 dark:hover:bg-zinc-800"
-          >
-            {t("about.support.shareBtn")}
-          </button>
-        </div>
-      </section>
-
-      {/* 联系方式 - 邮箱 */}
-      <section className="space-y-3">
-        <h2 className="text-lg font-medium text-foreground">
-          {t("about.contact.title")}
-        </h2>
-        <p className="text-zinc-600 dark:text-zinc-400">
-          <span className="font-medium text-foreground">
-            {t("about.contact.email")}
-          </span>
-          <a
-            href={`mailto:${t("about.contact.emailValue")}`}
-            className="text-zinc-700 underline hover:text-foreground dark:text-zinc-300 dark:hover:text-foreground"
-          >
-            {t("about.contact.emailValue")}
-          </a>
-        </p>
-      </section>
+        {/* 联系方式 */}
+        <Card className="border-2 border-border shadow-md">
+          <CardHeader>
+            <h2 className="text-xl font-bold text-foreground sm:text-2xl">
+              {t("about.contact.title")}
+            </h2>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground text-lg">
+              <span className="font-semibold text-foreground">
+                {t("about.contact.email")}
+              </span>{" "}
+              <a
+                href={`mailto:${t("about.contact.emailValue")}`}
+                className="text-primary underline hover:no-underline"
+              >
+                {t("about.contact.emailValue")}
+              </a>
+            </p>
+          </CardContent>
+        </Card>
       </div>
 
       {/* 复制成功提示 */}
@@ -148,60 +176,48 @@ export function AboutContent() {
         <div
           role="status"
           aria-live="polite"
-          className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-lg bg-foreground px-4 py-3 text-sm font-medium text-background shadow-lg dark:bg-foreground dark:text-background"
+          className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-lg border-2 border-border bg-card px-6 py-3 text-base font-semibold text-foreground shadow-lg"
         >
           {t("about.support.copiedHint")}
         </div>
       )}
 
       {/* 请支持我 - 收款码弹窗 */}
-      {showPaymentModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="payment-modal-title"
-        >
-          <button
-            type="button"
-            aria-label={t("about.support.paymentModalClose")}
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-            onClick={() => setShowPaymentModal(false)}
-          />
-          <div className="relative w-full max-w-2xl rounded-xl border border-zinc-200 bg-background p-6 shadow-xl dark:border-zinc-700 sm:p-8">
-            <h2
-              id="payment-modal-title"
-              className="mb-6 text-lg font-medium text-foreground sm:text-xl"
-            >
+      <Dialog open={showPaymentModal} onOpenChange={setShowPaymentModal}>
+        <DialogContent className="max-w-2xl border-2 border-border">
+          <DialogHeader>
+            <DialogTitle id="payment-modal-title" className="text-xl sm:text-2xl">
               {t("about.support.paymentModalTitle")}
-            </h2>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-8">
-              {PAYMENT_QR.map(({ key, src }) => (
-                <div
-                  key={key}
-                  className="flex flex-col items-center gap-3"
-                >
-                  <span className="text-sm font-medium text-foreground">
-                    {t(`about.support.${key}`)}
-                  </span>
-                  <img
-                    src={src}
-                    alt={t(`about.support.${key}`)}
-                    className="h-48 w-48 max-w-full rounded-lg border border-zinc-200 object-contain dark:border-zinc-600 sm:h-52 sm:w-52"
-                  />
-                </div>
-              ))}
-            </div>
-            <button
-              type="button"
+            </DialogTitle>
+          </DialogHeader>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-8">
+            {PAYMENT_QR.map(({ key, src }) => (
+              <div
+                key={key}
+                className="flex flex-col items-center gap-3"
+              >
+                <span className="text-base font-semibold text-foreground">
+                  {t(`about.support.${key}`)}
+                </span>
+                <img
+                  src={src}
+                  alt={t(`about.support.${key}`)}
+                  className="h-48 w-48 max-w-full rounded-lg border-2 border-border object-contain sm:h-52 sm:w-52"
+                />
+              </div>
+            ))}
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
               onClick={() => setShowPaymentModal(false)}
-              className="mt-8 w-full rounded-lg border border-zinc-300 bg-transparent py-2 text-sm font-medium text-foreground hover:bg-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-offset-2 dark:border-zinc-600 dark:hover:bg-zinc-800"
+              className="w-full"
             >
               {t("about.support.paymentModalClose")}
-            </button>
-          </div>
-        </div>
-      )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

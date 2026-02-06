@@ -50,12 +50,12 @@ export function InputWithLineNumbers({
 
   return (
     <div
-      className={`flex overflow-hidden rounded-lg border border-zinc-300 bg-white dark:border-zinc-600 dark:bg-zinc-900 ${className}`}
+      className={`flex overflow-hidden rounded-lg border-2 border-input bg-background ${className}`}
       style={{ minHeight }}
     >
       <div
         ref={gutterRef}
-        className="flex-shrink-0 overflow-y-auto overflow-x-hidden border-r border-zinc-200 bg-zinc-100/80 text-right font-mono text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800/80 dark:text-zinc-400 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        className="flex-shrink-0 overflow-y-auto overflow-x-hidden border-r border-border bg-muted/80 text-right font-mono text-muted-foreground [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         style={{
           width: `${GUTTER_MIN_WIDTH_REM}rem`,
           minHeight,
@@ -75,11 +75,18 @@ export function InputWithLineNumbers({
         >
           {Array.from({ length: lineCount }, (_, i) => {
             const num = i + 1;
-            const isError = errorLine !== null && errorLine !== undefined && num === errorLine;
+            const isError =
+              errorLine !== null &&
+              errorLine !== undefined &&
+              num === errorLine;
             return (
               <div
                 key={num}
-                className={isError ? "font-medium text-red-600 dark:text-red-400" : ""}
+                className={
+                  isError
+                    ? "font-semibold text-destructive"
+                    : ""
+                }
                 style={{ height: LINE_HEIGHT, lineHeight: LINE_HEIGHT }}
                 data-line={num}
               >
@@ -92,13 +99,14 @@ export function InputWithLineNumbers({
       <textarea
         ref={textareaRef}
         aria-label={ariaLabel}
-        className="min-w-0 flex-1 resize-none overflow-y-auto rounded-r-lg border-0 bg-transparent text-foreground placeholder-zinc-500 focus:outline-none focus:ring-0 dark:placeholder-zinc-400"
+        className="min-w-0 flex-1 resize-none overflow-y-auto rounded-r-lg border-0 bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-0"
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         spellCheck={false}
         style={{
-          fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+          fontFamily:
+            "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
           fontSize: FONT_SIZE_PX,
           lineHeight: LINE_HEIGHT,
           minHeight,
@@ -149,12 +157,12 @@ export function OutputWithLineNumbers({
           return (
             <div
               key={lineNum}
-              className="flex border-b border-zinc-100/50 dark:border-zinc-800/50"
+              className="flex border-b border-border/50"
               style={{ height: LINE_HEIGHT, lineHeight: LINE_HEIGHT }}
               data-line={lineNum}
             >
               <div
-                className="flex-shrink-0 select-none border-r border-zinc-200 bg-zinc-100/80 pr-2 text-right text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800/80 dark:text-zinc-400"
+                className="flex-shrink-0 select-none border-r border-border bg-muted/80 pr-2 text-right text-muted-foreground"
                 style={{
                   width: `${GUTTER_MIN_WIDTH_REM}rem`,
                   height: LINE_HEIGHT,
@@ -166,9 +174,7 @@ export function OutputWithLineNumbers({
               </div>
               <div
                 className={`min-w-0 flex-1 whitespace-pre break-all px-3 ${
-                  highlighted
-                    ? "bg-amber-100 dark:bg-amber-900/30"
-                    : ""
+                  highlighted ? "bg-chart-4/20" : ""
                 }`}
                 style={{ height: LINE_HEIGHT, lineHeight: LINE_HEIGHT }}
               >

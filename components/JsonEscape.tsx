@@ -6,6 +6,9 @@ import {
   escapeJsonString,
   unescapeJsonString,
 } from "@/lib/json-validator";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function JsonEscape() {
   const { t } = useI18n();
@@ -49,26 +52,27 @@ export default function JsonEscape() {
   }, []);
 
   return (
-    <section
-      className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-6 dark:border-zinc-800 dark:bg-zinc-900/30 sm:p-8"
+    <Card
+      className="border-chart-3/40 bg-chart-3/5"
       aria-labelledby="json-escape-title"
     >
-      <h2
-        id="json-escape-title"
-        className="mb-4 text-lg font-medium text-foreground sm:text-xl"
-      >
-        {t("jsonEscape.title")}
-      </h2>
-
-      <div className="space-y-4">
+      <CardHeader>
+        <h2
+          id="json-escape-title"
+          className="text-xl font-bold text-foreground sm:text-2xl"
+        >
+          {t("jsonEscape.title")}
+        </h2>
+      </CardHeader>
+      <CardContent className="space-y-4">
         <div>
           <label htmlFor="json-escape-input" className="sr-only">
             {t("jsonEscape.ariaLabelInput")}
           </label>
-          <textarea
+          <Textarea
             id="json-escape-input"
             aria-label={t("jsonEscape.ariaLabelInput")}
-            className="min-h-[120px] w-full resize-y rounded-lg border border-zinc-300 bg-white px-3 py-2 font-mono text-sm text-foreground placeholder-zinc-500 focus:border-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-500/20 dark:border-zinc-600 dark:bg-zinc-900 dark:placeholder-zinc-400 dark:focus:border-zinc-400 dark:focus:ring-zinc-400/20"
+            className="min-h-[120px] resize-y"
             placeholder={t("jsonEscape.inputPlaceholder")}
             value={input}
             onChange={(e) => {
@@ -80,48 +84,52 @@ export default function JsonEscape() {
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <button
+          <Button
             type="button"
+            size="lg"
+            className="bg-chart-2 text-white hover:bg-chart-2/90"
             aria-label={t("jsonEscape.ariaLabelEscape")}
             onClick={handleEscape}
-            className="rounded-lg bg-violet-600 px-4 py-2 text-sm font-medium text-white hover:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 dark:bg-violet-500 dark:hover:bg-violet-400 dark:focus:ring-violet-400 dark:focus:ring-offset-zinc-900"
           >
             {t("jsonEscape.escape")}
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            size="lg"
+            className="bg-chart-1 text-white hover:bg-chart-1/90"
             aria-label={t("jsonEscape.ariaLabelUnescape")}
             onClick={handleUnescape}
-            className="rounded-lg bg-sky-600 px-4 py-2 text-sm font-medium text-white hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:bg-sky-500 dark:hover:bg-sky-400 dark:focus:ring-sky-400 dark:focus:ring-offset-zinc-900"
           >
             {t("jsonEscape.unescape")}
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="outline"
+            size="lg"
             onClick={handleCopyOutput}
             disabled={!output}
-            className="rounded-lg border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-foreground hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none dark:border-zinc-600 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:focus:ring-zinc-400 dark:focus:ring-offset-zinc-900"
           >
             {copyLabel ?? t("jsonEscape.copyOutput")}
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="outline"
+            size="lg"
             onClick={handleClear}
-            className="rounded-lg border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-foreground hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 dark:border-zinc-600 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:focus:ring-zinc-400 dark:focus:ring-offset-zinc-900"
           >
             {t("jsonValidator.clear")}
-          </button>
+          </Button>
         </div>
 
         <div>
           <label htmlFor="json-escape-output" className="sr-only">
             {t("jsonEscape.ariaLabelOutput")}
           </label>
-          <textarea
+          <Textarea
             id="json-escape-output"
             readOnly
             aria-label={t("jsonEscape.ariaLabelOutput")}
-            className="min-h-[120px] w-full resize-y rounded-lg border border-zinc-300 bg-zinc-100/80 px-3 py-2 font-mono text-sm text-foreground placeholder-zinc-500 dark:border-zinc-600 dark:bg-zinc-800/80 dark:placeholder-zinc-400"
+            className="min-h-[120px] resize-y bg-muted/80"
             placeholder={t("jsonEscape.outputPlaceholder")}
             value={output}
           />
@@ -129,15 +137,15 @@ export default function JsonEscape() {
 
         {error !== null && (
           <div
-            className="rounded-lg border border-red-500/50 bg-red-500/10 p-4 dark:border-red-400/40 dark:bg-red-500/10"
+            className="rounded-lg border-2 border-destructive/50 bg-destructive/10 p-4"
             role="alert"
           >
-            <p className="text-sm font-medium text-red-700 dark:text-red-400">
+            <p className="text-base font-semibold text-destructive">
               {t("jsonEscape.unescapeError")}: {error}
             </p>
           </div>
         )}
-      </div>
-    </section>
+      </CardContent>
+    </Card>
   );
 }

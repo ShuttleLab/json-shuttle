@@ -8,6 +8,7 @@ export const messages = {
       home: "首页",
       about: "关于",
       mainAria: "主导航",
+      githubAria: "在 GitHub 上查看 JSON Shuttle",
     },
     home: {
       title: "JSON Shuttle",
@@ -134,6 +135,7 @@ export const messages = {
       home: "Home",
       about: "About",
       mainAria: "Main navigation",
+      githubAria: "View JSON Shuttle on GitHub",
     },
     home: {
       title: "JSON Shuttle",

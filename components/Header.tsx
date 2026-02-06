@@ -1,8 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { Github } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import LanguageSwitcher from "./LanguageSwitcher";
+
+const GITHUB_URL = "https://github.com/ShuttleLab/json-shuttle";
 
 const navItems = [
   { href: "/", key: "nav.home" },
@@ -35,6 +38,15 @@ export default function Header() {
               {t(key)}
             </Link>
           ))}
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+            aria-label={t("nav.githubAria")}
+          >
+            <Github className="size-5" />
+          </a>
           <LanguageSwitcher />
         </nav>
       </div>

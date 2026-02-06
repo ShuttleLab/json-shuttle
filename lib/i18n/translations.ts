@@ -102,6 +102,7 @@ export const messages = {
       },
       support: {
         title: "支持我们",
+        supportDesc: "JSON Shuttle 免费使用，由个人维护。若对您有帮助，欢迎通过以下方式支持。",
         supportBtn: "支持项目",
         shareBtn: "分享给朋友",
         copiedHint: "已经复制网址，可以直接发给好友",
@@ -229,6 +230,7 @@ export const messages = {
       },
       support: {
         title: "Support Us",
+        supportDesc: "JSON Shuttle is free and maintained by one person. If it helps you, consider supporting:",
         supportBtn: "Support Project",
         shareBtn: "Share with Friends",
         copiedHint: "URL copied. You can share it with friends.",

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
+import { Heart, Share2 } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -130,23 +131,39 @@ export function AboutContent() {
         </Card>
 
         {/* 支持我们 */}
-        <Card className="border-2 border-primary/30 bg-primary/10 shadow-md">
-          <CardHeader>
-            <h2 className="text-xl font-bold text-foreground sm:text-2xl">
+        <div className="rounded-2xl bg-gradient-to-r from-primary via-primary to-chart-5 p-8 text-primary-foreground shadow-xl sm:p-10">
+          <div className="mb-6 flex items-center gap-4">
+            <div className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-white/20">
+              <Heart className="size-7" />
+            </div>
+            <h2 className="text-2xl font-bold sm:text-3xl">
               {t("about.support.title")}
             </h2>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-wrap gap-3">
-              <Button size="lg" onClick={handleSupport}>
-                {t("about.support.supportBtn")}
-              </Button>
-              <Button variant="outline" size="lg" onClick={handleShare}>
-                {t("about.support.shareBtn")}
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+          </div>
+          <p className="mb-8 text-lg leading-relaxed opacity-90">
+            {t("about.support.supportDesc")}
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <Button
+              variant="secondary"
+              size="lg"
+              className="bg-background font-semibold text-foreground transition-transform duration-200 hover:scale-105 hover:bg-muted hover:shadow-lg active:scale-100"
+              onClick={handleSupport}
+            >
+              <Heart className="size-5" />
+              {t("about.support.supportBtn")}
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-2 border-primary-foreground bg-transparent font-semibold text-primary-foreground hover:bg-primary-foreground/10"
+              onClick={handleShare}
+            >
+              <Share2 className="size-5" />
+              {showCopiedHint ? t("about.support.copiedHint") : t("about.support.shareBtn")}
+            </Button>
+          </div>
+        </div>
 
         {/* 联系方式 */}
         <Card className="border-2 border-border shadow-md">

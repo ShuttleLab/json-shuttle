@@ -115,7 +115,7 @@ export const messages = {
       contact: {
         title: "联系方式",
         email: "邮箱：",
-        emailValue: "shuttlelab.org@gmail.com",
+        emailValue: "support@shuttlelab.org",
       },
     },
     footer: {
@@ -243,7 +243,7 @@ export const messages = {
       contact: {
         title: "Contact",
         email: "Email: ",
-        emailValue: "shuttlelab.org@gmail.com",
+        emailValue: "support@shuttlelab.org",
       },
     },
     footer: {

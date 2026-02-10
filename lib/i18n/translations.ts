@@ -123,7 +123,7 @@ export const messages = {
       navAria: "页脚导航",
     },
     common: {
-      appName: "JSON Shuttle",
+      appName: "ShuttleLab",
     },
     lang: {
       zh: "中文",
@@ -251,7 +251,7 @@ export const messages = {
       navAria: "Footer navigation",
     },
     common: {
-      appName: "JSON Shuttle",
+      appName: "ShuttleLab",
     },
     lang: {
       zh: "中文",

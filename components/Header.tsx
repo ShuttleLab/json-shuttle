@@ -19,7 +19,8 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60 shadow-sm">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:h-16 sm:px-6 lg:px-8">
         <Link
-          href="/"
+          href="https://shuttlelab.org"
+          target="_blank"
           className="flex items-center gap-2 text-lg font-semibold text-foreground transition-opacity hover:opacity-80 sm:text-xl"
         >
           <span className="tracking-tight">{t("common.appName")}</span>

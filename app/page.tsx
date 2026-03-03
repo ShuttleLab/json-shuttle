@@ -19,8 +19,8 @@ export default function Home() {
 
       <div className="space-y-10">
         <JsonValidator />
-        <JsonRepair />
         <JsonEscape />
+        <JsonRepair />
       </div>
     </div>
   );

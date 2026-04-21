@@ -22,11 +22,6 @@ const SECURITY_KEYS = [
 
 const TOAST_DURATION_MS = 2500;
 
-const PAYMENT_QR = [
-  { key: "alipay", src: "/alipay-qr.png" },
-  { key: "paypal", src: "/paypal-qr.png" },
-  { key: "wechat", src: "/wechat-qr.png" },
-] as const;
 
 const CHART_CLASSES = [
   "border-chart-1/40 bg-chart-1/10",
@@ -38,7 +33,6 @@ const CHART_CLASSES = [
 export function AboutContent() {
   const { t } = useI18n();
   const [showCopiedHint, setShowCopiedHint] = useState(false);
-  const [showPaymentModal, setShowPaymentModal] = useState(false);
   const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const showCopiedToast = useCallback(() => {
@@ -50,9 +44,6 @@ export function AboutContent() {
     }, TOAST_DURATION_MS);
   }, []);
 
-  const handleSupport = () => {
-    setShowPaymentModal(true);
-  };
 
   const handleShare = async () => {
     const url = typeof window !== "undefined" ? window.location.href : "";
@@ -145,15 +136,6 @@ export function AboutContent() {
           </p>
           <div className="flex flex-wrap gap-4">
             <Button
-              variant="secondary"
-              size="lg"
-              className="bg-background font-semibold text-foreground transition-transform duration-200 hover:scale-105 hover:bg-muted hover:shadow-lg active:scale-100"
-              onClick={handleSupport}
-            >
-              <Heart className="size-5" />
-              {t("about.support.supportBtn")}
-            </Button>
-            <Button
               variant="outline"
               size="lg"
               className="border-2 border-primary-foreground bg-transparent font-semibold text-primary-foreground hover:bg-primary-foreground/10"
@@ -199,42 +181,7 @@ export function AboutContent() {
         </div>
       )}
 
-      {/* 请支持我 - 收款码弹窗 */}
-      <Dialog open={showPaymentModal} onOpenChange={setShowPaymentModal}>
-        <DialogContent className="max-w-2xl border-2 border-border">
-          <DialogHeader>
-            <DialogTitle id="payment-modal-title" className="text-xl sm:text-2xl">
-              {t("about.support.paymentModalTitle")}
-            </DialogTitle>
-          </DialogHeader>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-8">
-            {PAYMENT_QR.map(({ key, src }) => (
-              <div
-                key={key}
-                className="flex flex-col items-center gap-3"
-              >
-                <span className="text-base font-semibold text-foreground">
-                  {t(`about.support.${key}`)}
-                </span>
-                <img
-                  src={src}
-                  alt={t(`about.support.${key}`)}
-                  className="h-48 w-48 max-w-full rounded-lg border-2 border-border object-contain sm:h-52 sm:w-52"
-                />
-              </div>
-            ))}
-          </div>
-          <DialogFooter>
-            <Button
-              variant="outline"
-              onClick={() => setShowPaymentModal(false)}
-              className="w-full"
-            >
-              {t("about.support.paymentModalClose")}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+
     </>
   );
 }

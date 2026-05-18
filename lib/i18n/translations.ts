@@ -115,6 +115,8 @@ export const messages = {
     footer: {
       rights: "保留所有权利。",
       navAria: "页脚导航",
+      contact: "联系我们",
+      otherTools: "ShuttleLab 旗下其他产品",
     },
     common: {
       appName: "ShuttleLab",
@@ -237,6 +239,8 @@ export const messages = {
     footer: {
       rights: "All rights reserved.",
       navAria: "Footer navigation",
+      contact: "Contact",
+      otherTools: "Other tools by ShuttleLab",
     },
     common: {
       appName: "ShuttleLab",

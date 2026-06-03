@@ -1,5 +1,5 @@
 # Cloudflare Pages 配置（next-on-pages 构建输出）
-name = "vibe-kanban-pages"
+name = "json-shuttle"
 compatibility_date = "2024-09-23"
 # SSR/Edge 必须开启，否则运行时会报 no-nodejs_compat
 compatibility_flags = ["nodejs_compat"]

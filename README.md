@@ -2,6 +2,8 @@
 
 A small web app to validate, format, repair, and escape JSON. Everything runs in the browser; no data is sent to any server.
 
+**🔗 Try it live: [Free online JSON validator & formatter](https://json.shuttlelab.org)** — validate, beautify, repair & escape JSON entirely in your browser.
+
 ## Features
 
 - **Validate** – Parse JSON and see errors with line/column

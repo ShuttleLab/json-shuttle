@@ -1,8 +1,7 @@
-# Cloudflare Pages 配置（next-on-pages 构建输出）
+# Static export → Cloudflare Pages (static output in ./out).
+# CF Pages project with Git auto-deploy. Dashboard build command MUST be
+# `npx next build` (framework preset: Next.js Static HTML Export), NOT
+# next-on-pages. `pages_build_output_dir` below is the source of truth for output.
 name = "json-shuttle"
-compatibility_date = "2024-09-23"
-# SSR/Edge 必须开启，否则运行时会报 no-nodejs_compat
-compatibility_flags = ["nodejs_compat"]
-
-# 构建输出目录，与 package.json 中 pages:build 产出一致
-pages_build_output_dir = ".vercel/output/static"
+compatibility_date = "2026-01-01"
+pages_build_output_dir = "out"

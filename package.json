@@ -8,10 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "pages:build": "npx @cloudflare/next-on-pages",
-    "preview": "npm run pages:build && wrangler pages dev .vercel/output/static",
-    "pages:dev": "wrangler pages dev .vercel/output/static",
-    "deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static"
+    "preview": "next build && npx serve out",
+    "deploy": "next build && wrangler pages deploy out"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
@@ -20,7 +18,7 @@
     "clsx": "^2.1.1",
     "jsonrepair": "^3.13.2",
     "lucide-react": "^0.563.0",
-    "next": "15.5.2",
+    "next": "16.2.6",
     "react": "^19",
     "react-dom": "^19",
     "tailwind-merge": "^3.4.0",
@@ -28,13 +26,12 @@
     "vibe-kanban-web-companion": "^0.0.5"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "^15",
+    "eslint-config-next": "^16",
     "tailwindcss": "^4",
     "typescript": "5.9.3",
     "wrangler": "^3"
